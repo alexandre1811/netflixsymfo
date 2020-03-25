@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TotalController!{% endblock %}
+
+{% block body %}
+
+    <h2><center>Ensemble des Sections</center></h2>
+        {% if series is not empty %}
+           <table class="table">
+               <thead>
+                    <tr>
+                        <th>Compteur Series en BDD</th>
+                        <th>Acces aux Series</th>
+                    </tr>
+               </thead>
+               <tbody>
+                    <tr>
+                        <td>{{ series | length}}</td>
+                        <td> <a class="btn btn-primary" href="{{ path('serie') }}">Serie</a></td>
+                    </tr>
+
+               </tbody>
+           </table>
+        {% else %}
+            <p>Il n'y a aucune serie</p>
+    {% endif %}
+    {% if categories is not empty %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nombres Categories en BDD</th>
+                <th>Acces aux Categories</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ categories | length}}</td>
+                    <td> <a class="btn btn-primary" href="{{ path('categorie') }}">Categorie</a></td>
+                </tr>
+
+            </tbody>
+        </table>
+
+
+    {% else %}
+        <p>Il n'y a aucune Categorie</p>
+
+    {% endif %}
+{% endblock %}

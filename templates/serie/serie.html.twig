@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification de {{ serie.nom }}{% endblock %}
+
+{% block body %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Date de Debut</th>
+                <th>Date de Fin</th>
+                <th>Affiche</th>
+                <th>Nombre de Saison</th>
+                <th>Categorie</th>
+
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ serie.nom }}</td>
+                    <td>{{ serie.datedebut | date("d/m/Y") }}</td>
+                    {% if serie.datefin == null %}<td>En cours</td>
+                    {% else %}<td> {{ serie.datefin }}</td>{% endif %}
+                    {% if serie.affiche is not null %}
+                        <td><img src="{{ asset('/uploads/'~serie.affiche) }}" style="width: 250px;height:auto"></td>
+                    {% endif %}
+                    <td>{{ serie.nbsaison}}</td>
+                    <td>{{ serie.categorie}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+    <h2><center>Modifier le produit</center></h2>
+    {{ form(form_edit) }}
+
+{% endblock %}

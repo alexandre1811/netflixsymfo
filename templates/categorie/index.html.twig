@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Categorie{% endblock %}
+{% block body %}
+
+<h1>Liste de categories</h1>
+{% if categories is not empty %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for categorie in categories %}
+            <tr>
+                <td>{{ categorie.nom }}</td>
+                <td><a class="btn btn-primary" href="{{ path('modifiercategorie',{'id':categorie.id}) }}">Modifier</a>
+                    <a class="btn btn-danger" href="{{ path('suppressioncategorie',{'id':categorie.id}) }}">Suppression</a>
+                </td>
+            </tr>
+        {%  endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Il n'y a aucune categorie</p>
+{% endif %}
+
+    {{ form(form_ajout) }}
+
+
+{% endblock %}

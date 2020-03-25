@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Series{% endblock %}
+
+{% block body %}
+    <h1>Liste des Series</h1>
+    {% if series is not empty %}
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Date de Debut</th>
+                <th>Date de Fin</th>
+                <th>Affiche</th>
+                <th>Nombre de Saison</th>
+                <th>Categorie</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for serie in series %}
+                <tr>
+                    <td>{{ serie.nom }}</td>
+                    <td>{{ serie.datedebut | date("d/m/Y") }}</td>
+                    {% if serie.datefin == null %}<td>En cours</td>
+                    {% else %}<td> {{ serie.datefin }}</td>{% endif %}
+                    {% if serie.affiche is not null %}
+                        <td><img src="{{ asset('/uploads/'~serie.affiche) }}" style="width: 250px;height:auto"></td>
+                        {% else %}
+                        <td></td>
+                    {% endif %}
+                    <td>{{ serie.nbsaison}}</td>
+                    <td>{{ serie.categorie}}</td>
+                    <td><a class="btn btn-primary" href="{{ path('modifuneserie',{'id':serie.id}) }}">Modifier</a>
+                        <a class="btn btn-danger" href="{{ path('suppressionserie',{'id':serie.id}) }}">Supprimer</a>
+                    </td>
+
+                </tr>
+            {%  endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>Il n'y a aucune Series</p>
+    {% endif %}
+    <h2><center>Ajout de Series</center></h2>
+    {{ form(form_ajout) }}
+{% endblock %}
